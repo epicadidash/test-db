@@ -1,6 +1,6 @@
-# db
+# DB
 ## About
-A DB build in Rust .
+A key-pair Database build in Rust.
 #Try runiing command :
 ```
 CREATE <key in STring> <Value in i32>
