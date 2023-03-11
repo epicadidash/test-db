@@ -1,6 +1,6 @@
 # DB
 ## About
-A key-pair Database build in Rust.
+A value-key pair Database build in Rust.
 #Try runiing commands :
 To create A value-key pair in DB.
 Run:
