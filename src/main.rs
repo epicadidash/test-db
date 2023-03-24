@@ -34,7 +34,7 @@ fn inputin(s:&mut String){
 }
 fn commands(star:&String, ste:& mut HashMap<String,i32>) {
     let w = star.unicode_words().collect::<Vec<&str>>();
-    if w.len() == 3 {
+   {
         if w[0].to_uppercase() == "INSERT" {
             let k:String = w[1].to_string();
             let v:i32 = w[2].to_string().parse().unwrap();
