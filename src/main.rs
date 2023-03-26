@@ -51,6 +51,9 @@ fn commands(star:&String, ste:& mut HashMap<String,i32>) {
            }
             println!("Key:{t} , Value:{k}")
         }
+        else {
+            println!("Wrong Command")
+        }
     }
    
 }
