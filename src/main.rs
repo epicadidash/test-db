@@ -57,9 +57,12 @@ fn commands(star:&String, ste:& mut HashMap<String,i32>) {
         else if w[0].to_uppercase() == "DELETE" {
             let k:String = w[1].to_string();
             ste.remove(&k);
+            println!("Deleted")
         }
         else if w[0].to_uppercase() == "SHOW"{
-            
+            for (key, val) in ste.iter() {
+                println!("key: {key} val: {val}");
+            }
         }
         else {
             println!("Wrong Command")
