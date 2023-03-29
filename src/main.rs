@@ -1,32 +1,8 @@
-use std::collections::HashMap;
 use std::io;
-use std::io::{stdout, Write};
 extern crate unicode_segmentation;
 use unicode_segmentation::UnicodeSegmentation;
-pub trait Create{
-    
-} 
-enum  Tdata{
-    Table(&'static str)
-}
-enum Int {
-    BigInteger(i64),
-    NInteger(i32),
-    SmallInteger(i16)
-}
-enum Float {
-    BigDecimal(f64),
-    NDecimal(f32)
-}
-enum Tye<T>{
-Type(T)
-}
-enum Type{
-Integer(Int),
-Decimal(Float),
-Boolean(bool),
-String(&'static str),
-}
+use std::io::{stdout, Write};
+
 fn print_prompt(){
     let mut lock = stdout().lock();
     write!(lock, "db>").unwrap();
@@ -35,29 +11,36 @@ fn print_prompt(){
 fn inputin(s:&mut String){
     io::stdin().read_line(s).expect("failed to readline");
 }
+fn commands(star:&String,file:&mut std::fs::File){
+    let w = star.unicode_words().collect::<Vec<&str>>();
+    let k:String = w[0].to_string();
 
-fn chekforcommands(hei:&String,ste:& mut  HashMap<String,i32>){
+        if(k.to_uppercase() == "INSERT"){
+            let y = w[1].to_string();
+            println!("{y}");
+            file.write_all(y.as_bytes()).expect("failed")
+    }
+}
+fn chekforcommands(hei:&String, file:&mut std::fs::File){
     let t:Option<char> = Some(hei.chars().nth(0).unwrap());
     let he = hei;
 match t{
 Some('.')=>{
-    println!("Recognized Command");
+    commands(he,file);
 },
 _=>{
-commands(he,ste);
+commands(he,file);
 }
 }
 }
 fn main() {
-    use std::collections::HashMap;
-
-    let mut scores = HashMap::new();
+    let mut file = std::fs::File::create(".trekup").expect("create failed");
     while true {
        print_prompt();
         let mut input = String::new();
         {
         inputin(&mut input);     
         }
-        chekforcommands(& input, & mut scores);
+        chekforcommands(& input, &mut file);
     }
 }
