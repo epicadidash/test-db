@@ -2,7 +2,7 @@ use std::io;
 extern crate unicode_segmentation;
 use unicode_segmentation::UnicodeSegmentation;
 use std::io::{stdout, Write};
-
+//print function
 fn print_prompt(){
     let mut lock = stdout().lock();
     write!(lock, "db>").unwrap();
