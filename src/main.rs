@@ -31,8 +31,7 @@ _=>{
 commands(he,file);
 }
 }
-}
-fn main() {
+}fn main() {
     let mut file = std::fs::File::create(".trekup").expect("create failed");
     while true {
        print_prompt();
