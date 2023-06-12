@@ -16,7 +16,6 @@ fn commands(star:&String,file:&mut std::fs::File){
 
         if(k.to_uppercase() == "INSERT"){
             let y = w[1].to_string();
-            println!("{y}");
             file.write_all(y.as_bytes()).expect("failed")
     }
 }
@@ -31,7 +30,8 @@ _=>{
 commands(he,file);
 }
 }
-}fn main() {
+}
+fn main() {
     let mut file = std::fs::File::create(".trekup").expect("create failed");
     while true {
        print_prompt();
