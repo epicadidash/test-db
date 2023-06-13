@@ -7,9 +7,11 @@ fn print_prompt(){
     write!(lock, "db>").unwrap();
     io::stdout().flush();
 }
+
 fn inputin(s:&mut String){
     io::stdin().read_line(s).expect("failed to readline");
 }
+
 fn commands(star:&String,file:&mut std::fs::File){
     let w = star.unicode_words().collect::<Vec<&str>>();
     let k:String = w[0].to_string();
@@ -19,6 +21,7 @@ fn commands(star:&String,file:&mut std::fs::File){
             file.write_all(y.as_bytes()).expect("failed")
     }
 }
+
 fn chekforcommands(hei:&String, file:&mut std::fs::File){
     let t:Option<char> = Some(hei.chars().nth(0).unwrap());
     let he = hei;
@@ -31,6 +34,7 @@ commands(he,file);
 }
 }
 }
+
 fn main() {
     let mut file = std::fs::File::create(".trekup").expect("create failed");
     while true {
