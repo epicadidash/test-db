@@ -1,4 +1,6 @@
 use std::io;
+use std::fs::OpenOptions;
+use std::io::Read;
 extern crate unicode_segmentation;
 use unicode_segmentation::UnicodeSegmentation;
 use std::io::{stdout, Write};
@@ -12,37 +14,46 @@ fn inputin(s:&mut String){
     io::stdin().read_line(s).expect("failed to readline");
 }
 
-fn commands(star:&String,file:&mut std::fs::File){
+fn commands(star:&String){
+    let dir_path = "D:/Projects/RUst/db/src/trekup"; // Replace with the path to your directory
+    let file_name = "hello.trekup";
+    let full_path = format!("{}/{}", dir_path, file_name);
+    let mut file = OpenOptions::new()
+    .read(true)
+    .write(true).open(full_path).expect("create failed");
+    let mut contents = String::new();
+    file.read_to_string(&mut contents);
     let w = star.unicode_words().collect::<Vec<&str>>();
     let k:String = w[0].to_string();
 
         if(k.to_uppercase() == "INSERT"){
             let y = w[1].to_string();
+            println!("{}", {&contents});
             file.write_all(y.as_bytes()).expect("failed")
     }
 }
 
-fn chekforcommands(hei:&String, file:&mut std::fs::File){
+fn chekforcommands(hei:&String){
     let t:Option<char> = Some(hei.chars().nth(0).unwrap());
     let he = hei;
 match t{
 Some('.')=>{
-    commands(he,file);
+    commands(he);
 },
 _=>{
-commands(he,file);
+commands(he);
 }
 }
 }
 
 fn main() {
-    let mut file = std::fs::File::create(".trekup").expect("create failed");
+    
     while true {
        print_prompt();
         let mut input = String::new();
         {
         inputin(&mut input);     
         }
-        chekforcommands(& input, &mut file);
+        chekforcommands(& input) ;
     }
 }
