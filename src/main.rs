@@ -13,8 +13,9 @@ fn print_prompt(){
 fn inputin(s:&mut String){
     io::stdin().read_line(s).expect("failed to readline");
 }
-fn error_output(star:&str){
-    println!("Fatal: {} not a command",star);
+fn error_output(star:String){
+    
+    println!("Fatal: {} not a command",&star[1..]);
 }
 fn commands(star:&String){
     let dir_path = "/home/adwait/SDE/test-db/"; // Replace with the path to your directory
@@ -44,7 +45,7 @@ fn main_commands(star:&String){
             std::process::exit(0)
         }
         else{
-                error_output(star.trim())
+                error_output(star.trim().to_string())
             }
     
 }
