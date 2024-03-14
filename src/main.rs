@@ -13,12 +13,15 @@ fn print_prompt(){
 fn inputin(s:&mut String){
     io::stdin().read_line(s).expect("failed to readline");
 }
-
+fn error_output(star:&str){
+    println!("Fatal: {} not a command",star);
+}
 fn commands(star:&String){
-    let dir_path = "D:/Projects/RUst/db/src/trekup"; // Replace with the path to your directory
-    let file_name = "hello.trekup";
+    let dir_path = "/home/adwait/SDE/test-db/"; // Replace with the path to your directory
+    let file_name = "adwait.trekup";
     let full_path = format!("{}/{}", dir_path, file_name);
     let mut file = OpenOptions::new()
+    .create(true)
     .read(true)
     .write(true).open(full_path).expect("create failed");
     let mut contents = String::new();
@@ -32,13 +35,26 @@ fn commands(star:&String){
             file.write_all(y.as_bytes()).expect("failed")
     }
 }
+fn main_commands(star:&String){
+    let w = star.unicode_words().collect::<Vec<&str>>();
+    if(w.len()>= 1){
+    let k:String = w[0].to_string();
+        if (k.to_uppercase() == "EXIT"){
 
+            std::process::exit(0)
+        }
+        else{
+                error_output(star.trim())
+            }
+    
+}
+}
 fn chekforcommands(hei:&String){
     let t:Option<char> = Some(hei.chars().nth(0).unwrap());
     let he = hei;
 match t{
 Some('.')=>{
-    commands(he);
+    main_commands(he);
 },
 _=>{
 commands(he);
