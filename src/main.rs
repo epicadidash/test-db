@@ -1,7 +1,9 @@
+pub mod modules;
 use std::fs::OpenOptions;
 use std::io;
 use std::io::Read;
 extern crate unicode_segmentation;
+use modules::datapage;
 use std::io::{stdout, Write};
 use unicode_segmentation::UnicodeSegmentation;
 fn print_prompt() {
@@ -17,7 +19,7 @@ fn error_output(star: String) {
     println!("Fatal: {} not a command", &star[1..]);
 }
 fn commands(star: &String) {
-    let dir_path = "/home/adwait/Desktop/test-db/"; // Replace with the path to your directory
+    let dir_path = "/home/adwait/SDE/test-db/"; // Replace with the path to your directory
     let file_name = "adwait.trekup";
     let full_path = format!("{}/{}", dir_path, file_name);
     let mut file = OpenOptions::new()
