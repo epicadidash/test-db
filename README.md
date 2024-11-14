@@ -1,4 +1,4 @@
-# SQL DB (sqlite clone)
+# SQL DB 
 ## About
 # Try runiing commands :
 ``
